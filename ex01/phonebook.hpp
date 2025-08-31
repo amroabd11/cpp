@@ -132,6 +132,8 @@ void PhoneBook::SEARCH()
         //     std::cout << "> ";
         j++;
     }
+    if (i == j)
+        std::cout << "id not found, sorry try again!!!"<<std::endl;
 }
 
 
