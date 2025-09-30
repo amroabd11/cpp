@@ -1,19 +1,20 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror  -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME=phonebook
-SRC=phonebook.cpp
+SRC=PhoneBook.cpp Contact.cpp
 OBJ=$(SRC:.cpp=.o)
 
 all:$(NAME)
 
-NAME:$(OBJ)
+$(NAME):$(OBJ)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
-%.o:%.cpp phonebook.h
+%.o:%.cpp PhoneBook.hpp Contact.hpp
+	$(CC) $(CFLAGS) $< -c
 
 clean:
 	rm -rf $(OBJ)
 
 fclean:clean
-	rm -rif $(NAME)
+	rm -rf $(NAME)
 
 re:fclean all	

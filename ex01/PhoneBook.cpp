@@ -1,4 +1,4 @@
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 
 int main()
 {
@@ -13,7 +13,6 @@ int main()
             phone1.ADD();
         else if (choice == "SEARCH")
         {
-            
             phone1.SEARCH();
         }
         else if (choice == "EXIT")
