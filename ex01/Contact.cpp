@@ -9,6 +9,7 @@ Contact::Contact(std::string F_name, std::string L_name, std::string N_name, int
 	nick_name = N_name;
 	id = id_n;
 }
+
 std::string Contact::get_firstname()
 {
         return first_name;

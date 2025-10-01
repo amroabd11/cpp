@@ -80,9 +80,10 @@ void PhoneBook::ADD()
 	    }
 	    break ;
     	}
-    contacts[i % 8] = Contact(firstName, lastName, nickName, i, phoneNum, darkestSec);
+    contacts[i % 8] = Contact(firstName, lastName, nickName, i%8, phoneNum, darkestSec);
     i++;
 }
+
 void PhoneBook::display()
 {
     int i = PhoneBook::i;
@@ -91,12 +92,19 @@ void PhoneBook::display()
         std::string NickName = contacts[j].get_nickname();
         std::string FirstName = contacts[j].get_firstname();
         std::string LastName = contacts[j].get_lastname();
+
         if (FirstName.length() > 10)
             FirstName = FirstName.substr(0, 9) + ".";
+	else
+		FirstName = FirstName.append(10 - FirstName.length(), ' ');
         if (LastName.length() > 10)
             LastName = LastName.substr(0, 9) + ".";
+	else
+		LastName = LastName.append(10 - LastName.length(), ' ');
         if (NickName.length() > 10)
             NickName = NickName.substr(0, 9) + ".";
+	else 
+		NickName = NickName.append(10 - NickName.length(), ' ');
         std::cout << j << " | "<< FirstName << " | " <<  LastName << " | " << NickName <<std::endl;
     }
 }
@@ -106,6 +114,7 @@ void PhoneBook::SEARCH()
     std::string id_n;
     int j = 0;
     int i = PhoneBook::i;
+    std::cout << "i is :"<<i<<std::endl;
     display();
     while(true)
     {
@@ -127,30 +136,30 @@ void PhoneBook::SEARCH()
     {
         if ((contacts[j].get_id() == std::atoi(id_n.c_str())))
         {
-            std::string NickName = contacts[j].get_nickname();
-            std::string FirstName = contacts[j].get_firstname();
-            std::string LastName = contacts[j].get_lastname();
-	    unsigned long f_len = FirstName.length();
-	    unsigned long n_len = NickName.length();
-	    unsigned long l_len = LastName.length();
+           std::string NickName = contacts[j].get_nickname();
+           std::string FirstName = contacts[j].get_firstname();
+           std::string LastName = contacts[j].get_lastname();
 
-            if (f_len > 10)
-                FirstName = FirstName.substr(0, 9) + ".";
-	    if (f_len < 10)
-		    FirstName = FirstName.append((10 - f_len), ' ');
-            if (l_len > 10)
-                LastName = LastName.substr(0, 9) + ".";
-            if (n_len > 10)
-                NickName = NickName.substr(0, 9) + ".";
-            std::cout << j << " | "<< FirstName << " | " <<  LastName << " | " << NickName <<std::endl;
-            break ;
+           if (FirstName.length() > 10)
+               FirstName = FirstName.substr(0, 9) + ".";
+	   else
+	           FirstName = FirstName.append((10 - FirstName.length()), ' ');
+           if (LastName.length() > 10)
+               LastName = LastName.substr(0, 9) + ".";
+	   else
+	           LastName = LastName.append(10 - LastName.length(), ' ');
+           if (NickName.length() > 10)
+               NickName = NickName.substr(0, 9) + ".";
+	   else
+	           NickName = NickName.append(10 - NickName.length(), ' ');
+           std::cout << j << " | "<< FirstName << " | " <<  LastName << " | " << NickName <<std::endl;
+           break ;
         }
         j++;
     }
     if (i == j)
         std::cout << "id not found, try again!!!"<<std::endl;
 }
-
 
 int check_id(std::string id_s)
 {
