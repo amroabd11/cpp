@@ -1,5 +1,7 @@
 #include "Contact.hpp"
 
+Contact::Contact(){}
+
 Contact::Contact(std::string F_name, std::string L_name, std::string N_name, int id_n, std::string P_num, std::string d_secret)
 {
 	darkest_secret = d_secret;

@@ -13,7 +13,7 @@ private:
     std::string darkest_secret;
     int id;
 public:
-    Contact(){};
+    Contact();
     Contact(std::string, std::string, std::string, int, std::string, std::string);
     std::string get_firstname();
     std::string get_lastname();

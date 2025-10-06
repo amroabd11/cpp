@@ -3,6 +3,8 @@
 int check_id(std::string id_s);
 int is_valid(std::string str);
 
+PhoneBook::PhoneBook():i(0){}
+
 void PhoneBook::ADD()
 {
     std::string firstName;
@@ -112,9 +114,9 @@ void PhoneBook::SEARCH()
 		std::cout<<"invalid, try again!!!"<<std::endl;
 		continue ;
 	    }
-	    if (id_n.length() > 1)
+	    if (id_n.length() > 1 || id_n == "9" || id_n == "8")
 	    {
-		    std::cout<<"invalid, ids range [0, 9]"<<std::endl;
+		    std::cout<<"invalid, ids range [0, 7]"<<std::endl;
 		    continue;
 	    }
 	    break ;
@@ -173,7 +175,7 @@ int is_valid(std::string str)
 		return 0;
 	return 1;
 }
-// TODO NEED TO FIX THE PROBLEM WITH MULTI SPACES FOLLOWED BY A CHAR
+
 
 int main()
 {

@@ -7,7 +7,7 @@ private:
     Contact contacts[8];
     int i;
 public:
-    PhoneBook():i(0){}
+    PhoneBook();
     void ADD();
     void display();
     void SEARCH();
