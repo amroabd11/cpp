@@ -1,5 +1,5 @@
 CC = c++
-CFLAGS = -Wall -Wextra -Werror  -std=c++98
+CFLAGS = -g -O0 -Wall -Wextra -Werror  -std=c++98 
 NAME=megaphone
 SRC=megaphone.cpp
 OBJ=$(SRC:.cpp=.o)
@@ -15,6 +15,6 @@ clean:
 	rm -rf $(OBJ)
 
 fclean:clean
-	rm -rif $(NAME)
+	rm -rf $(NAME)
 
 re:fclean all	

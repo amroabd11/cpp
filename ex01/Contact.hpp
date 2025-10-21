@@ -19,5 +19,7 @@ public:
     std::string get_lastname();
     int get_id();
     std::string get_nickname();
+    std::string get_phonenumber();
+    std::string get_darkestSec();
 };
 

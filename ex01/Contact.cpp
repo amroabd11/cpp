@@ -30,5 +30,15 @@ std::string Contact::get_nickname()
 	return nick_name;
 }
 
+std::string Contact::get_darkestSec()
+{
+	return darkest_secret;
+}
+
+std::string Contact::get_phonenumber()
+{
+	return phone_number;
+}
+
 
 
