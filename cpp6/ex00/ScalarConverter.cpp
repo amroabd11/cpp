@@ -1,10 +1,8 @@
 #include "ScalarConverter.hpp"
 
-void	ScalarConverter::convert(std::string &str)
+void	convert_toChar(std::string& ch)
 {
-	if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
-	{
-		char one = str[1];
+	char one = str[1];
 		if (std::isprint(one))
 		{
 			std::cout << "char: " << str[1]<<std::endl;
@@ -18,5 +16,18 @@ void	ScalarConverter::convert(std::string &str)
 			std::cout << "float: " << static_cast<float>(str[1])<< "f"<<std::endl;
 			std::cout << "double: " << static_cast<double>(str[1])<<std::endl;
 		}
-	}
+}
+
+void	ScalarConverter::convert(std::string &str)
+{
+	if ()//TODO THIS IF will handle the special cases such as inf -inf nanf -nanf
+	{}
+	char *end;
+	double ret = std::strtod(str, end);
+	if (!end)
+		throw std::runtime_error("wrong intput stupid hacker!!");
+	if (ret >= 32 && ret <= 126 )
+
+
+
 }
