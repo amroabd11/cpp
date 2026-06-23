@@ -25,20 +25,34 @@ void	specialLiteral(std::string& str)
 	}
 }
 
+bool	is_special(std::string& str)
+{
+	return (str =="nan" || str=="nanf" ||str=="+inf"
+		||str=="-inf"||str=="+inff"||str=="-inff");
+}
+bool	is_char(std::string& str)
+{
+	if (str.length() == 1 && !std::isdigit(str[0]))
+		return true;
+	return false;
+}
+
+
 void	ScalarConverter::convert( std::string &str)
 {
 	std::cout <<std::fixed << std::setprecision(1);
-	if (str == "nan" || str == "nanf" || str == "+inf" || str == "-inf" || str == "+inff" || str == "-inff"){
+	if (is_special(str))
+	{
 		specialLiteral(str);
-		return ;
+		return;
 	}
 	char *end;
-	if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
+	if (is_char(str))
 	{
-		std::cout << "char: "<<str[1]<<std::endl;
-		std::cout << "int: "<<static_cast<int>(str[1])<<std::endl;
-		std::cout << "float: "<<static_cast<float>(str[1])<<"f"<<std::endl;
-		std::cout << "double: "<<static_cast<double>(str[1])<<std::endl;
+		std::cout << "char: "<<str[0]<<std::endl;
+		std::cout << "int: "<<static_cast<int>(str[0])<<std::endl;
+		std::cout << "float: "<<static_cast<float>(str[0])<<"f"<<std::endl;
+		std::cout << "double: "<<static_cast<double>(str[0])<<std::endl;
 		return ; 
 	}
 	double ret = std::strtod(str.c_str(), &end);
@@ -47,6 +61,7 @@ void	ScalarConverter::convert( std::string &str)
 		std::cout << "'"<<end<<"'"<<std::endl;
 		throw std::runtime_error("wrong intput stupid hacker!!");
 	}
+//	if (is_int(ret))
 	if (ret >= 0 && ret <= 126 ){
 		if (std::isprint(static_cast<int>(ret))){
 			std::cout << "char: "<<static_cast<char>(ret)<<std::endl;
@@ -73,7 +88,6 @@ void	ScalarConverter::convert( std::string &str)
 		std::cout<<  "float: " <<static_cast<float>(ret)<<"f"<<std::endl;
 		std::cout<< "double: " <<static_cast<double>(ret)<<std::endl;
 	}
-
 }
 
 
