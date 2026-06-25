@@ -61,7 +61,6 @@ void	ScalarConverter::convert( std::string &str)
 		std::cout << "'"<<end<<"'"<<std::endl;
 		throw std::runtime_error("wrong intput stupid hacker!!");
 	}
-//	if (is_int(ret))
 	if (ret >= 0 && ret <= 126 ){
 		if (std::isprint(static_cast<int>(ret))){
 			std::cout << "char: "<<static_cast<char>(ret)<<std::endl;

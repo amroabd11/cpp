@@ -6,7 +6,7 @@ int main()
 	data.id = 50;
 	uintptr_t raw = Serializer::serialize(&data);
 	Data* rec = Serializer::deserialize(raw);
-	if (&data = rec )
+	if (&data == rec )
 		std::cout << "equal"<<std::endl;
 }
 
