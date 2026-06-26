@@ -8,5 +8,6 @@ int main()
 	Data* rec = Serializer::deserialize(raw);
 	if (&data == rec )
 		std::cout << "equal"<<std::endl;
+
 }
 

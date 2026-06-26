@@ -11,7 +11,7 @@ $(NAME):$(objects)
 %.o:%.cpp ScalarConverter.hpp
 	$(CC) -c  $<  
 clean:
-	rm $(objects)
+	rm -rf $(objects)
 fclean:clean
 	rm -rf $(NAME)
 re: fclean all

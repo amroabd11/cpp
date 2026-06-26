@@ -13,7 +13,7 @@ $(NAME):$(obj)
 	$(cc) -c  $< 
 
 clean:
-	rm $(obj)
+	rm -rf $(obj)
 fclean:clean
-	rm $(NAME)
+	rm -rf $(NAME)
 re:fclean all
