@@ -3,9 +3,17 @@
 int main()
 {
 	Array<int> arr(40);
-	Array<int>(arr2)= arr;
+	Array<int> arr2= arr;
 	try{
 		arr[39] = 75;
+		std::cout << arr[39]<<std::endl;
+		std::cout << arr[390]<<std::endl;
+	}
+	catch(std::exception& e){
+		std::cout << e.what()<<std::endl;
+	}
+	try{
+		arr[40] = 75;
 		std::cout << arr[39]<<std::endl;
 		std::cout << arr[390]<<std::endl;
 	}

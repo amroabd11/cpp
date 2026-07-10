@@ -17,18 +17,26 @@ class Array{
 		Array& operator=(const Array& arr)
 		{
 			if (this != &arr){
-				array = new T[arr.sizee];
+				T *new_array = new T[arr.sizee];
+				for(unsigned int i =0;i<arr.sizee;i++)
+					new_array[i] = arr.array[i];
+				delete [] array;
+				array = new_array;
 				sizee = arr.sizee;
 			}
 			return *this;
 		}
-		Array(const Array& arr):array(new T[arr.sizee]), sizee(arr.sizee){}
+		Array(const Array& arr):array(new T[arr.sizee]), sizee(arr.sizee)
+		{
+			for(unsigned int i =0; i<sizee;i++)
+				array[i] = arr.array[i];
+		}
 	
 		unsigned int size()const{
 			return sizee;
 		}
 		T& operator[](size_t  ind){
-			if (ind > sizee)
+			if (ind >= sizee)
 				throw std::runtime_error("out of bounds ");
 			return array[ind];
 		}

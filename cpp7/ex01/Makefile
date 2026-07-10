@@ -1,6 +1,6 @@
 CC=c++ -Wall -Wextra -Werror -std=c++98
 
-files=main123.cpp
+files=main.cpp
 objects=$(files:.cpp=.o)
 NAME=iter
 

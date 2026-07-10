@@ -1,32 +1,34 @@
 #include "iter.hpp"
 
-int main()
+class Awesome
 {
-	int a[5] = {1,2,3,4,5};
-	iter<int>(a, sizeof(a)/sizeof(a[0]), fun<int>); 
-	for (size_t i = 0; i<sizeof(a)/sizeof(a[0]);i++)
-		std::cout << a[i]<<std::endl;
-		//--------------------------------------
-	char s[] = "my crime is of curiosity";
-	char * str =s;
-	iter<char>(s, sizeof(s), fun<char>); 
-	std::cout << str<<std::endl;
+  public:
+    Awesome( void ) : _n( 42 ) { return; }
+    int get( void ) const { return this->_n; }
+  private:
+    int _n;
+};
+std::ostream & operator<<( std::ostream & o, Awesome const & rhs )
+{
+  o << rhs.get();
+  return o;
 }
 
+template< typename T >
+void print( T& x )
+{
+  std::cout << x << std::endl;
+  return;
+}
 
+int main() {
+  int tab[] = { 0, 1, 2, 3, 4 };
+  Awesome tab2[5];
 
+  iter( tab, 5, print<const int> );
+  iter( tab2, 5, print<Awesome> );
+  iter<int>(tab, 5, print<int>);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  return 0;
+}
 
