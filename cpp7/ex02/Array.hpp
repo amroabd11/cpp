@@ -28,14 +28,18 @@ class Array{
 		}
 		Array(const Array& arr):array(new T[arr.sizee]), sizee(arr.sizee)
 		{
-			for(unsigned int i =0; i<sizee;i++)
-				array[i] = arr.array[i];
+			*this = arr;
 		}
 	
 		unsigned int size()const{
 			return sizee;
 		}
 		T& operator[](size_t  ind){
+			if (ind >= sizee)
+				throw std::runtime_error("out of bounds ");
+			return array[ind];
+		}
+		const T& operator[](size_t  ind)const{
 			if (ind >= sizee)
 				throw std::runtime_error("out of bounds ");
 			return array[ind];
