@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 class Span{
 	private:
@@ -15,6 +16,6 @@ class Span{
 		~Span();
 
 		void addNumber(int nb);
-		const int shortestSpan()const;
-		const int longestSpan()const;
+		int shortestSpan()const;
+		int longestSpan()const;
 };
