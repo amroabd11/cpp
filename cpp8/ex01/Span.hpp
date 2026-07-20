@@ -16,6 +16,6 @@ class Span{
 		~Span();
 
 		void addNumber(int nb);
-		int shortestSpan()const;
+		int shortestSpan();
 		int longestSpan()const;
 };

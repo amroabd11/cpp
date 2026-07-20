@@ -28,15 +28,15 @@ void Span::addNumber(int nb)
 		throw std::runtime_error("you can't add numbers anymore");
 }
 
-int Span::shortestSpan() const{
+int Span::shortestSpan() {
 	if (vect_numbers.size() <= 1)
 		return 0;
 	std::sort(vect_numbers.begin(), vect_numbers.end());
-	int ref = 1;
-	for(size_t i=0; i<vect_numbers.size();i++)
+	int ref = vect_numbers[1]-vect_numbers[0];
+	for(size_t i=0; i<vect_numbers.size()-1;i++)
 	{
 		int res = vect_numbers[i+1] - vect_numbers[i];
-		if (ref >res)
+		if (res < ref)
 			ref = res;
 	}
 	return ref;
@@ -45,11 +45,12 @@ int Span::shortestSpan() const{
 int Span::longestSpan() const{
 	if (vect_numbers.size() <= 1)
 		return 0;
-	std::vector<int>::iterator it;
-	it = minmax_element(vect_numbers.begin(), vect_numbers.end());
-	int first_min = *it.first;
-	int second_max = *it.second;
-	return second_max - first_min;
+	std::vector<int>::const_iterator min_it;
+	std::vector<int>::const_iterator max_it;
+	min_it = min_element(vect_numbers.begin(), vect_numbers.end());
+	max_it = max_element(vect_numbers.begin(), vect_numbers.end());
+
+	return *max_it - *min_it;
 }
 
 
