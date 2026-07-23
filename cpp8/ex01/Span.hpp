@@ -18,4 +18,13 @@ class Span{
 		void addNumber(int nb);
 		int shortestSpan();
 		int longestSpan()const;
+		template<typename it1>
+		void addNumber(it1 begin, it1 end)
+		{
+			while(begin < end)
+			{
+				addNumber(*begin);
+				begin++;
+			}
+		}
 };

@@ -40,6 +40,36 @@ int main()
 //
 //	std::cout << (it->second)<<std::endl;
 //	std::cout << (it2->second)<<std::endl;
-
+	std::vector<int> vec(14,9);
+	vec.push_back(2);
+	vec.push_back(11);
+	Span sp2(16);
+	try{
+		sp2.addNumber(vec.begin()+1, vec.end());
+	}
+	catch(...){
+		std::cout << "error\n";
+	}
+	
+	std::cout << sp2.shortestSpan()<<std::endl;
+	std::cout << sp2.longestSpan()<<std::endl;
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
