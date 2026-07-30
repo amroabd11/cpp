@@ -2,6 +2,8 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 
 typedef std::map<std::string, long> mymap;
 

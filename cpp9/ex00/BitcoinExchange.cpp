@@ -1,4 +1,4 @@
-#include "BitcoiExchange.hpp"
+#include "BitcoinExchange.hpp"
 
 void parse_data(char* file, std::ifstream& inputfile)
 {
@@ -11,8 +11,13 @@ void parse_data(char* file, std::ifstream& inputfile)
 	std::getline(inputfile, line);
 	if (line != "date | value")
 		throw std::runtime_error("first line must be 'date | value'");
+	//std::stringstream token;
 	while(getline(inputfile,line))
 	{
+		std::stringstream token(line); 
+		while(token >> line)
+			std::cout << "word: "<< line<<std::endl;
 
+//		std::cout << "this is the token : "<<token.str()<<std::endl;
 	}
 }
