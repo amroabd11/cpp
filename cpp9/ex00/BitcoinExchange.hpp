@@ -4,5 +4,5 @@
 #include <algorithm>
 
 
-void parse_data(std::ifstream& file);
+void parse_data(std::ifstream& filefd, char *file);
 
