@@ -1,6 +1,23 @@
 #include "BitcoinExchange.hpp"
 
 
+bool ValidDate(std::string date)
+{
+	if (date.length() != 10)
+		return false;
+	size_t pos = date.find('-');
+	std::string year;
+	std::string month;
+	std::string day;
+
+	for (int i=0; i<date.length(); i++)
+	{
+		if( i == 4 || i == 7)
+			continue;
+		if (!std::isdigit(date[i]))
+			return false;
+	}
+}
 
 void parse_csv(mymap& dbmap)
 {
@@ -18,10 +35,9 @@ void parse_csv(mymap& dbmap)
 			continue;
 		std::string date = line.substr(0,pos);
 		std::string value = line.substr(pos+1);
-		std::err;
 		if (!ValidDate(date))
 			continue;
-		char *end;
+		char *end; 
 		double num = std::strtod(value.c_str(), &end);
 		if (*end != '\0' || value.empty())
 			continue;
@@ -30,12 +46,15 @@ void parse_csv(mymap& dbmap)
 
 }
 
-double ValidValue(std::string value, double& val)
+bool ValidValue(std::string value, double& val)
 {
 	char* end;
 	val = std::strtod(value.c_str(), &end);
 	if( *end!='\0' || value.empty())
+		return false;
+	return true;
 }
+
 
 void process_data(std::ifstream& inputfile, mymap& dbmap)
 {
