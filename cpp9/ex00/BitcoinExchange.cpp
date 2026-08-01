@@ -5,11 +5,11 @@ bool ValidDate(std::string date)
 {
 	if (date.length() != 10)
 		return false;
-	size_t pos = date.find('-');
-	std::string year;
-	std::string month;
-	std::string day;
-
+	int year=0;
+	int month=0;
+	int day=0;
+	if (date[4] != '-' || date[7] != '-')
+		return false;
 	for (int i=0; i<date.length(); i++)
 	{
 		if( i == 4 || i == 7)
@@ -17,6 +17,21 @@ bool ValidDate(std::string date)
 		if (!std::isdigit(date[i]))
 			return false;
 	}
+	try{
+		std::istringstream iss(date.substr(0,4));
+		iss >> year;
+		iss(date.substr(5,2));
+		iss>> month;
+		iss(date.substr(8,2));
+		iss>>day;
+	}
+	catch(...){
+		return false;
+	}
+	if (year < 0)
+		return false;
+	if(month < 1 || month > 12)
+		return false;
 }
 
 void parse_csv(mymap& dbmap)
