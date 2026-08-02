@@ -10,11 +10,11 @@ int main(int argc, char** v)
 	std::string expression(v[1]);
 	try{
 		parse_input(expression);
+		calcul(expression);
 	}
-	catch(...)
+	catch(std::exception& e)
 	{
-		return 1;
+		std::cerr<< e.what() <<std::endl;
 	}
-	calcul(expression);
 }
 
