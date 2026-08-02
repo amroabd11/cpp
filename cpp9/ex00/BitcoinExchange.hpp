@@ -7,5 +7,6 @@
 
 typedef std::map<std::string, double> mymap;
 
-void parse_data(std::ifstream&, mymap&, char);
+void process_data(std::ifstream&, mymap&);
+void parse_csv(mymap&);
 

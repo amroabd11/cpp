@@ -3,13 +3,11 @@
 int main(int argc, char** v){
 	
 	std::ifstream inputfile(v[1]);
-	std::ifstream dbfile("data.csv");
 
-	mymap inputmap;
 	mymap dbmap;
 	try{
-		parse_data(inputfile, inputmap, '|');
-		parse_data(dbfile, dbmap, ',');
+		parse_csv(dbmap);
+		process_data(inputfile, dbmap);
 	}
 	catch(std::exception& e)
 	{

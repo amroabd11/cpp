@@ -1,6 +1,12 @@
 #include "BitcoinExchange.hpp"
 
 
+bool isLeapYear(int year)
+{
+	return (year%4 == 0 && year %100 !=0) || (year %400 ==0);
+}
+
+
 bool ValidDate(std::string date)
 {
 	if (date.length() != 10)
@@ -17,21 +23,31 @@ bool ValidDate(std::string date)
 		if (!std::isdigit(date[i]))
 			return false;
 	}
-	try{
-		std::istringstream iss(date.substr(0,4));
-		iss >> year;
-		iss(date.substr(5,2));
-		iss>> month;
-		iss(date.substr(8,2));
-		iss>>day;
-	}
-	catch(...){
-		return false;
-	}
+//	try{
+//		//std::istringstream iss(date.substr(0,4));
+//		//iss >> year;
+//		//iss(date.substr(5,2));
+//		//iss>> month;
+//		//iss(date.substr(8,2));
+//		//iss>>day;
+//	}
+//	catch(...){
+//		return false;
+//	}
+	year = std::atoi(date.substr(0,4).c_str());
+	month = std::atoi(date.substr(5,2).c_str());
+	day = std::atoi(date.substr(8,2).c_str());
 	if (year < 0)
 		return false;
 	if(month < 1 || month > 12)
 		return false;
+	int daysOFmonth[]= {31, 28,31,30,31,30,31,31,30,31,30,31};
+	int maxday = daysOFmonth[month-1];
+	if (month ==2 && isLeapYear(year))
+		maxday=29;
+	if (day < 1 || day >maxday)
+		return false;
+	return true;
 }
 
 void parse_csv(mymap& dbmap)
@@ -46,10 +62,17 @@ void parse_csv(mymap& dbmap)
 	while(getline(db, line))
 	{
 		size_t pos = line.find(',');
-		if (pos == std::string:npos)
+		if (pos == std::string::npos)
 			continue;
+//		if (!line.empty() && line[line.size() - 1] == '\n')
+//			line.erase(line.size() - 1);
 		std::string date = line.substr(0,pos);
 		std::string value = line.substr(pos+1);
+	//	std::cout << date<<std::endl ;
+	//	if (value[value.size()-1] == '\n'){
+	//		std::cout << "ma3rt\n";
+	//		value.erase(value.size()-1);
+	//	}
 		if (!ValidDate(date))
 			continue;
 		char *end; 
@@ -65,7 +88,7 @@ bool ValidValue(std::string value, double& val)
 {
 	char* end;
 	val = std::strtod(value.c_str(), &end);
-	if( *end!='\0' || value.empty())
+	if( *end!='\0' || value.empty() || val <0 || val > 1000)
 		return false;
 	return true;
 }
@@ -82,15 +105,15 @@ void process_data(std::ifstream& inputfile, mymap& dbmap)
 
 	while(getline(inputfile,line))
 	{
-		stringstream tokens(line);
+		std::stringstream tokens(line);
 
 		std::string delim;
 		std::string date;
 		std::string value;
-		token >>date>>delim>>value;
+		tokens >>date>>delim>>value;
 
 		double val;
-		if (delim != "|" && !ValidDate(date)){
+		if (delim != "|" || !ValidDate(date)){
 			std::cout << "Error: bad input => " <<line<<std::endl;
 			continue;
 		}
@@ -105,9 +128,17 @@ void process_data(std::ifstream& inputfile, mymap& dbmap)
 			continue;
 		}
 
-
+//		std::cout << "here is the date we searching on : "<<date<<std::endl;///////DEBUG
+//		std::cout << "-------------------------"<<std::endl;
+//		mymap::iterator it0 = dbmap.begin();
+//		mymap::iterator it1 = dbmap.end();
+//		for(;it0 != it1 ;it0++)
+//			std::cout << "this is the date in db: "<<it0->first<<std::endl;
+//		std::cout << "-------------------------"<<std::endl;
+//		return ;
 		
 		mymap::iterator it = dbmap.lower_bound(date);
+
 		if (it == dbmap.end() || it->first != date)
 		{
 			if (it == dbmap.begin())
