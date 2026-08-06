@@ -30,7 +30,7 @@ void make_jacobSeq(size_t size)
 
 void jacob_insert_order(size_t size)
 {
-
+	
 }
 
 void F_Jhonson_sort(vec_seq& sequence, long duration)
@@ -43,8 +43,14 @@ void F_Jhonson_sort(vec_seq& sequence, long duration)
 
 	if (sequence.size() < 2)
 	{
-		sequence.assign(sequence.begin(), sequence.end());
+		//sequence.assign(sequence.begin(), sequence.end()); //doesn't make sence
 		return ;
+	}
+	if (sequence.size() %2 != 0)
+	{
+		struggler = sequence[sequence.size() -1];
+		sequence.pop_back();
+		has_struggler = true;
 	}
 	for(size_t i=0; i< sequence.size()-1; i+=2)
 	{
@@ -53,17 +59,12 @@ void F_Jhonson_sort(vec_seq& sequence, long duration)
 		else
 			pairs.push_back(std::make_pair(sequence[i+1], sequence[i]);
 	}
-	if (sequence.size() %2 != 0)
-	{
-		struggler = sequence[sequence.size() -1];
-		has_struggler = true;
-	}
-	std::sort(pairs.begin(), pairs.end(), customCompareRule);
 	for(size_t i =0; i<pairs.size() ;i++)
 	{
 		pend_vec.push_back(pairs[i].first);
 		main_vec.push_back(pairs[i].second);
 	}
+	//TODO F_Jhonson_sort(main_vec);
 	main_vec.insert(main_vec.begin() , pend_vec[0]);
 	//make_jacobSeq(pend_vec.size());
 	jacob_insert_order(pend_vec.size());
