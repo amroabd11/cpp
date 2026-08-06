@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 
 
-void parse_vec(int argc, char **v, vec_seq& sequence) //TODO add a handle for intmax
+void parse_vec(int argc, char **v, vec_seq& sequence) //TODO add a handle for intmax and duplacates
 {
 	int num;
 	std::string err_rest;
@@ -21,6 +21,16 @@ void parse_vec(int argc, char **v, vec_seq& sequence) //TODO add a handle for in
 bool customCompareRule(const std::pair<int, int>& p1, const std::pair<int, int>& p2)
 {
 	return (p1.second < p2.scond);
+}
+
+void make_jacobSeq(size_t size)
+{
+
+}
+
+void jacob_insert_order(size_t size)
+{
+
 }
 
 void F_Jhonson_sort(vec_seq& sequence, long duration)
@@ -54,7 +64,9 @@ void F_Jhonson_sort(vec_seq& sequence, long duration)
 		pend_vec.push_back(pairs[i].first);
 		main_vec.push_back(pairs[i].second);
 	}
-	make_jacobSeq(pend_vec.size());
+	main_vec.insert(main_vec.begin() , pend_vec[0]);
+	//make_jacobSeq(pend_vec.size());
+	jacob_insert_order(pend_vec.size());
 
 
 
