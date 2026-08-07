@@ -8,14 +8,12 @@ void parse_input(std::string expression)
 	{
 		if(token.length() > 1)
 		{
-	//		std::cerr << "only digits accepted"<<std::endl;
 			throw std::logic_error("only digits accepted");
 		}
 		if (token != "+" && token != "-" && token != "/" && token != "*"
 			&& !std::isdigit(token[0]))
 		{
 			std::cout << token[0]<<std::endl;
-			//std::cerr << "Error: expression syntax is wrong"<<std::endl;
 			throw std::logic_error("Error: expression syntax is wrong");
 		}
 	}
@@ -23,7 +21,7 @@ void parse_input(std::string expression)
 
 void calcul(std::string expr)
 {
-	std::stack<int> stak;
+	std::stack<int, std::list<int> > stak;
 	std::string num = "";
 	for(size_t i =0; i< expr.size();i++)
 	{

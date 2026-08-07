@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stack>
 #include <sstream>
+#include <list>
 
 
 

@@ -1,5 +1,5 @@
 cc=c++ -Wall -Wextra -Werror -std=c++98
-NAME=Pmerge
+NAME=PmergeMe
 files=main.cpp PmergeMe.cpp
 obj=$(files:.cpp=.o)
 
