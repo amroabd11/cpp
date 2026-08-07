@@ -3,10 +3,11 @@
 #include <vector>
 #include <deque>
 #include <algorithm>
+#include <sstream>
 
 
-std::vector<int> vec_seq;
-std::vector<int> insertOrder;
+typedef std::vector<int> vec_seq;
+//std::vector<size_t> insertOrder;
 
 void parse_vec(int argc, char **v, vec_seq&);
 
