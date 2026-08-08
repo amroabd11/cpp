@@ -48,6 +48,8 @@ std::vector<size_t> jacob_insert_order(size_t size)
 	if (size == 0)
 		return insertOrder;
 	std::vector<unsigned long> jacobSeq = make_jacobSeq(size);
+	for (size_t i=0; i<jacobSeq.size(); i++)
+		std::cout << "----"<<jacobSeq[i] << std::endl;
 	insertOrder.push_back(0);
 	if (size == 1)
 		return insertOrder;
@@ -74,7 +76,7 @@ void F_Jhonson_sort(vec_seq& sequence)
 	int struggler=0;
 	bool has_struggler=false;
 	std::vector<int> main_vec;
-	std::vector<int> pend_vec;
+	// std::vector<int> pend_vec;
 
 	if (sequence.size() < 2)
 		return ;
@@ -92,11 +94,14 @@ void F_Jhonson_sort(vec_seq& sequence)
 	}
 	for(size_t i =0; i<pairs.size() ;i++)
 	{
-		pend_vec.push_back(pairs[i].first);
+		// pend_vec.push_back(pairs[i].first);
 		main_vec.push_back(pairs[i].second);
 	}
+	
 	std::vector<int> parterners = main_vec;
 	F_Jhonson_sort(main_vec);
+	std::vector<int> pend_vec(pairs.size());
+
 	main_vec.insert(main_vec.begin() , pend_vec[0]);
 
 	//make_jacobSeq(pend_vec.size());
@@ -105,8 +110,12 @@ void F_Jhonson_sort(vec_seq& sequence)
 	for(size_t i =1; i <insertOrder.size(); ++i)
 	{
 		size_t index = insertOrder[i];
-		std::vector<int>::iterator uppderBound = std::find(main_vec.begin(), main_vec.end(), parterners[index]);
-		std::vector<int>::iterator pos = std::lower_bound(main_vec.begin(), uppderBound, pend_vec[index]);
+		// if (sequence.size() == 10)
+		// 	std::cout << "index : " <<index << std::endl;
+		// std::vector<int>::iterator uppderBound = std::find(main_vec.begin(), main_vec.end(), parterners[index]);
+		std::vector<int>::iterator pos = std::lower_bound(main_vec.begin(), main_vec.end(), pend_vec[index]);
+		// if (sequence.size() == 10)
+		// 	std::cout << pend_vec[index] << ' ';
 		main_vec.insert(pos, pend_vec[index]);
 	}
 	if (has_struggler)
