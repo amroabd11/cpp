@@ -192,13 +192,64 @@ std::deque<size_t> jacob_insert_orderDeq(size_t size)
 	return insertOrder;
 }
 
+//void F_Jhonson_sort_deq(deque_seq& sequence)
+//{
+//	std::deque<std::pair<int ,int> > pairs;
+//	int struggler=0;
+//	bool has_struggler=false;
+//	std::deque<int> main_deq;
+//	std::deque<int> pend_deq;
+//
+//	if (sequence.size() < 2)
+//		return ;
+//	if (sequence.size() %2 != 0)
+//	{
+//		struggler = sequence[sequence.size() -1];
+//		has_struggler = true;
+//	}
+//	for(size_t i=0; i< sequence.size()-1; i+=2)
+//	{
+//		if (sequence[i] <sequence[i +1])
+//			pairs.push_back(std::make_pair(sequence[i], sequence[i+1]));
+//		else
+//			pairs.push_back(std::make_pair(sequence[i+1], sequence[i]));
+//	}
+//	for(size_t i =0; i<pairs.size() ;i++)
+//	{
+//		pend_deq.push_back(pairs[i].first);
+//		main_deq.push_back(pairs[i].second);
+//	}
+//	std::deque<int> parterners = main_deq;
+//	F_Jhonson_sort_deq(main_deq);
+//	main_deq.insert(main_deq.begin() , pend_deq[0]);
+//
+//	//make_jacobSeq(pend_vec.size());
+//	std::deque<size_t> insertOrder = jacob_insert_orderDeq(pend_deq.size());
+//
+//	for(size_t i =1; i <insertOrder.size(); ++i)
+//	{
+//		size_t index = insertOrder[i];
+//		std::deque<int>::iterator uppderBound = std::find(main_deq.begin(), main_deq.end(), parterners[index]);
+//		std::deque<int>::iterator pos = std::lower_bound(main_deq.begin(), uppderBound, pend_deq[index]);
+//		main_deq.insert(pos, pend_deq[index]);
+//	}
+//	if (has_struggler)
+//	{
+//		std::deque<int>::iterator pos = std::lower_bound(main_deq.begin(), main_deq.end(), struggler);
+//		main_deq.insert(pos,struggler);
+//	}
+//	sequence.assign(main_deq.begin(), main_deq.end());
+//
+//
+//}
+
 void F_Jhonson_sort_deq(deque_seq& sequence)
 {
 	std::deque<std::pair<int ,int> > pairs;
 	int struggler=0;
 	bool has_struggler=false;
 	std::deque<int> main_deq;
-	std::deque<int> pend_deq;
+	// std::vector<int> pend_vec;
 
 	if (sequence.size() < 2)
 		return ;
@@ -216,11 +267,30 @@ void F_Jhonson_sort_deq(deque_seq& sequence)
 	}
 	for(size_t i =0; i<pairs.size() ;i++)
 	{
-		pend_deq.push_back(pairs[i].first);
+		// pend_vec.push_back(pairs[i].first);
 		main_deq.push_back(pairs[i].second);
 	}
-	std::deque<int> parterners = main_deq;
+	
+	//std::vector<int> parterners = main_vec;
 	F_Jhonson_sort_deq(main_deq);
+	std::deque<int> pend_deq(main_deq.size());
+	std::deque<bool> used(pairs.size(),false);
+
+	//align pend_vec with main_vec;
+	for(size_t i =0 ; i< main_deq.size(); i++)
+	{
+		for(size_t j=0; j< pairs.size(); j++)
+		{
+			if (!used[j] && pairs[j].second == main_deq[i])
+			{
+				used[j] = true;
+				pend_deq[i] = pairs[j].first;
+				break;
+			}
+
+		}
+	}
+
 	main_deq.insert(main_deq.begin() , pend_deq[0]);
 
 	//make_jacobSeq(pend_vec.size());
@@ -229,8 +299,12 @@ void F_Jhonson_sort_deq(deque_seq& sequence)
 	for(size_t i =1; i <insertOrder.size(); ++i)
 	{
 		size_t index = insertOrder[i];
-		std::deque<int>::iterator uppderBound = std::find(main_deq.begin(), main_deq.end(), parterners[index]);
-		std::deque<int>::iterator pos = std::lower_bound(main_deq.begin(), uppderBound, pend_deq[index]);
+		// if (sequence.size() == 10)
+		// 	std::cout << "index : " <<index << std::endl;
+		// std::vector<int>::iterator uppderBound = std::find(main_vec.begin(), main_vec.end(), parterners[index]);
+		std::deque<int>::iterator pos = std::lower_bound(main_deq.begin(), main_deq.end(), pend_deq[index]);
+		// if (sequence.size() == 10)
+		// 	std::cout << pend_vec[index] << ' ';
 		main_deq.insert(pos, pend_deq[index]);
 	}
 	if (has_struggler)
@@ -239,10 +313,7 @@ void F_Jhonson_sort_deq(deque_seq& sequence)
 		main_deq.insert(pos,struggler);
 	}
 	sequence.assign(main_deq.begin(), main_deq.end());
-
-
 }
-
 
 
 
