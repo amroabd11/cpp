@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 
 
-void parse_vec(int argc, char **v, vec_seq& sequence) //TODO add a handle for intmax and duplacates
+void parse_vec(int argc, char **v, vec_seq& sequence)
 {
 	int num;
 	std::string err_rest;
@@ -17,11 +17,6 @@ void parse_vec(int argc, char **v, vec_seq& sequence) //TODO add a handle for in
 	}
 }
 
-
-//bool customCompareRule(const std::pair<int, int>& p1, const std::pair<int, int>& p2)
-//{
-//	return (p1.second < p2.scond);
-//}
 
 std::vector<unsigned long> make_jacobSeq(size_t size)
 {
@@ -98,9 +93,25 @@ void F_Jhonson_sort(vec_seq& sequence)
 		main_vec.push_back(pairs[i].second);
 	}
 	
-	std::vector<int> parterners = main_vec;
+	//std::vector<int> parterners = main_vec;
 	F_Jhonson_sort(main_vec);
-	std::vector<int> pend_vec(pairs.size());
+	std::vector<int> pend_vec(main_vec.size());
+	std::vector<bool> used(pairs.size(),false);
+
+	//align pend_vec with main_vec;
+	for(size_t i =0 ; i< main_vec.size(); i++)
+	{
+		for(size_t j=0; j< pairs.size(); j++)
+		{
+			if (!used[j] && pairs[j].second == main_vec[i])
+			{
+				used[j] = true;
+				pend_vec[i] = pairs[j].first;
+				break;
+			}
+
+		}
+	}
 
 	main_vec.insert(main_vec.begin() , pend_vec[0]);
 
