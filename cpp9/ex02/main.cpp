@@ -1,10 +1,10 @@
 #include "PmergeMe.hpp"
 
-static double diff_sec(const timespec& a, const timespec& b)
+static long diff_sec(const timespec& a, const timespec& b)
 {
 	long sec =b.tv_sec -a.tv_sec;
 	long nsec= b.tv_nsec -a.tv_nsec;
-	return (double(sec) + double(nsec)/1e9);
+	return (long(sec)*1e9 + long(nsec));
 }
 
 int main(int argc, char **v)
@@ -55,9 +55,9 @@ int main(int argc, char **v)
 
 
 	//std::cout << "Time to process a range of "<< sequence.size()<<" elements with std::vector : "<< (v_end - v_start)<< " us"<<std::endl;
-	std::cout << "Time to process a range of "<< sequence.size()<<" elements with std::vector : "<< diff_sec(start, end)<< " us"<<std::endl;
+	std::cout << "Time to process a range of "<< sequence.size()<<" elements with std::vector : "<< diff_sec(start, end)/1e3<< " us"<<std::endl;
 
 //	std::cout << "Time to process a range of "<< sequence.size()<<" elements with std::deque : "<< (d_end - d_start)<< " us"<<std::endl;
-	std::cout << "Time to process a range of "<< sequence.size()<<" elements with std::deque : "<< diff_sec(d_start, d_end)<< " us"<<std::endl;
+	std::cout << "Time to process a range of "<< sequence.size()<<" elements with std::deque : "<< diff_sec(d_start, d_end)/1e3<< " us"<<std::endl;
 	return 0;
 }

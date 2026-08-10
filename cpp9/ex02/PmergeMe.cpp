@@ -13,6 +13,8 @@ void parse_vec(int argc, char **v, vec_seq& sequence)
 			throw std::logic_error("Error");
 		if (num < 0)
 			throw std::logic_error("Error");
+		if (std::find(sequence.begin(), sequence.end(), num) != sequence.end())
+			throw std::logic_error("Error");
 		sequence.push_back(num);
 	}
 }
@@ -247,9 +249,3 @@ void F_Jhonson_sort_deq(deque_seq& sequence)
 
 
 
-double get_time()
-{
-	struct timeval tv;
-	gettimeofday(&tv,NULL);
-	return(tv.tv_sec* 1000000.0) +tv.tv_usec;
-}

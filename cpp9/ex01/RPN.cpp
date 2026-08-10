@@ -37,20 +37,27 @@ void calcul(std::string expr)
 		}
 		else
 		{
+			long result = 0;
 			if (stak.size() < 2)
 				throw std::logic_error("invalid expression: insufficient operands");
-			int b = stak.top();
+			long b = stak.top();
 			stak.pop();
-			int a = stak.top();
+			long a = stak.top();
 			stak.pop();
 			if(expr[i] == '+')
-				stak.push(a+b);
+				result = a+b;
 			else if(expr[i] == '-')
-				stak.push(a-b);
+				result = a-b;
 			else if(expr[i] == '*')
-				stak.push(a*b);
-			else
-				stak.push(a/b);
+				result = a*b;
+			else{
+				if (b == 0)
+					throw std::logic_error("division by 0 is invalid");
+				result = a/b;
+			}
+			if (result > INT_MAX || result< INT_MIN)
+				throw std::logic_error("Error");
+			stak.push(result);
 		}
 	}
 	if (stak.size() != 1)

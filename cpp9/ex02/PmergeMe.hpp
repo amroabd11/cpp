@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
-#include <sys/time.h>
+#include <ctime>
 
 
 typedef std::vector<int> vec_seq;
