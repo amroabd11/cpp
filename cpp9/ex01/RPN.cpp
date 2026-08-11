@@ -31,7 +31,6 @@ void calcul(std::string expr)
 		{
 			num += expr[i];
 			stak.push(std::atoi(num.c_str()));
-		//	std::cout << stak.top() <<std::endl;
 			num = "";
 			continue;
 		}

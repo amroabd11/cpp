@@ -53,15 +53,8 @@ void parse_csv(mymap& dbmap)
 		size_t pos = line.find(',');
 		if (pos == std::string::npos)
 			continue;
-//		if (!line.empty() && line[line.size() - 1] == '\n')
-//			line.erase(line.size() - 1);
 		std::string date = line.substr(0,pos);
 		std::string value = line.substr(pos+1);
-	//	std::cout << date<<std::endl ;
-	//	if (value[value.size()-1] == '\n'){
-	//		std::cout << "ma3rt\n";
-	//		value.erase(value.size()-1);
-	//	}
 		if (!ValidDate(date))
 			continue;
 		char *end; 
@@ -92,7 +85,7 @@ void process_data(std::ifstream& inputfile, mymap& dbmap)
 	if (line != "date | value")
 		throw std::runtime_error("Error: header is wrong");
 
-	while(getline(inputfile,line))
+	while(std::getline(inputfile,line))
 	{
 		std::stringstream tokens(line);
 
@@ -116,15 +109,6 @@ void process_data(std::ifstream& inputfile, mymap& dbmap)
 				std::cout << "Error: bad input => "<<line <<std::endl;
 			continue;
 		}
-
-//		std::cout << "here is the date we searching on : "<<date<<std::endl;///////DEBUG
-//		std::cout << "-------------------------"<<std::endl;
-//		mymap::iterator it0 = dbmap.begin();
-//		mymap::iterator it1 = dbmap.end();
-//		for(;it0 != it1 ;it0++)
-//			std::cout << "this is the date in db: "<<it0->first<<std::endl;
-//		std::cout << "-------------------------"<<std::endl;
-//		return ;
 		
 		mymap::iterator it = dbmap.lower_bound(date);
 

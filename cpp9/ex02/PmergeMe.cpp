@@ -45,8 +45,6 @@ std::vector<size_t> jacob_insert_order(size_t size)
 	if (size == 0)
 		return insertOrder;
 	std::vector<unsigned long> jacobSeq = make_jacobSeq(size);
-	for (size_t i=0; i<jacobSeq.size(); i++)
-		std::cout << "----"<<jacobSeq[i] << std::endl;
 	insertOrder.push_back(0);
 	if (size == 1)
 		return insertOrder;
