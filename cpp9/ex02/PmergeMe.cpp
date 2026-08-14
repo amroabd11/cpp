@@ -93,16 +93,14 @@ void F_Jhonson_sort(vec_seq& sequence)
 	
 	F_Jhonson_sort(main_vec);
 	std::vector<int> pend_vec(main_vec.size());
-	std::vector<bool> used(pairs.size(),false);
 
 	//align pend_vec with main_vec;
 	for(size_t i =0 ; i< main_vec.size(); i++)
 	{
 		for(size_t j=0; j< pairs.size(); j++)
 		{
-			if (!used[j] && pairs[j].second == main_vec[i])
+			if (pairs[j].second == main_vec[i])
 			{
-				used[j] = true;
 				pend_vec[i] = pairs[j].first;
 				break;
 			}
@@ -127,7 +125,8 @@ void F_Jhonson_sort(vec_seq& sequence)
 		std::vector<int>::iterator pos = std::lower_bound(main_vec.begin(), main_vec.end(), struggler);
 		main_vec.insert(pos,struggler);
 	}
-	sequence.assign(main_vec.begin(), main_vec.end());
+//	sequence.assign(main_vec.begin(), main_vec.end());
+	sequence = main_vec;
 }
 
 // implementation for deque;

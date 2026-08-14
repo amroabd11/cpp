@@ -15,7 +15,7 @@ typedef std::deque<int> deque_seq;
 void parse_vec(int argc, char **v, vec_seq&);
 
 
-void F_Jhonson_sort(vec_seq&);
+void F_Jhonson_sort(vec_seq& );
 void F_Jhonson_sort_deq(deque_seq&);
 
 double get_time();
